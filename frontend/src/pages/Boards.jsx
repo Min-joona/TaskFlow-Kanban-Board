@@ -42,7 +42,7 @@ export default function Boards() {
     <div className="min-h-screen">
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
-          <span className="flex items-center gap-2 font-extrabold text-indigo-600"><Trello size={22} /> TaskFlow</span>
+          <img src="/logo.png" alt="TaskFlow" className="h-8 w-auto" />
           <div className="flex items-center gap-3">
             <span className="text-sm text-slate-500">{user.name}</span>
             <button onClick={logout} className="btn-ghost"><LogOut size={16} /></button>

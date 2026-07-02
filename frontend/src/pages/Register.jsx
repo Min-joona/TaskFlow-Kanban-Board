@@ -21,7 +21,7 @@ export default function Register() {
     <div className="grid min-h-screen place-items-center bg-gradient-to-br from-indigo-600 to-violet-700 px-6">
       <div className="w-full max-w-sm">
         <div className="mb-6 flex items-center gap-3 text-white">
-          <Trello size={28} /> <h1 className="text-2xl font-extrabold">TaskFlow</h1>
+          <img src="/favicon.png" alt="" className="h-10 w-10 rounded-xl bg-white p-0.5" /> <h1 className="text-2xl font-extrabold">TaskFlow</h1>
         </div>
         <div className="rounded-2xl bg-white p-6 shadow-xl">
           <h2 className="text-lg font-bold">Create account</h2>
