@@ -1,52 +1,66 @@
-# TaskFlow — Kanban Board 📋
+# TaskFlow
 
-[![MERN](https://img.shields.io/badge/Stack-MERN-brightgreen)](#)
+A Trello-style kanban board for personal and team project management — drag-and-drop cards, multiple boards, labels, and automatic persistence, built on the MERN stack.
 
-A Trello-style project-management board with **drag-and-drop** cards and lists,
-multiple boards, labels, and auto-save — built on the MERN stack.
+**Live demo:** [taskflow-kanban.vercel.app](https://taskflow-kanban.vercel.app)
 
-> Built by **Amar Hassen Mohammednur**.
+## Overview
 
-## ✨ Features
+- **Drag & drop** — move and reorder cards across lists with native HTML5 drag events
+- **Multiple boards** — each user manages any number of color-coded boards
+- **Lists & cards** — create, rename, edit, and delete freely
+- **Card details** — descriptions and color labels
+- **Auto-save** — every change is debounced and persisted; no save button
+- **Private by design** — JWT authentication scopes all data to its owner
 
-- **Drag & drop** cards between lists and reorder them (native HTML5 DnD)
-- **Multiple boards** per user, each with a color accent
-- **Lists & cards** — add, rename, edit, delete
-- **Card details** — description + color labels
-- **Auto-save** — every change persists to MongoDB (debounced)
-- **JWT auth** — each user sees only their own boards
-- Clean, **mobile-responsive** UI
+## Architecture
 
-## 🧱 Tech Stack
-
-React 18 · Vite · Tailwind CSS · Node.js · Express · Mongoose · MongoDB · JWT
-
-## 🧩 Data model
-
-Lists and cards are **embedded** in the Board document, so a drag-reorder saves
-the whole board atomically in one request — simple and consistent.
-
-## 🚀 Getting Started
-
-### Backend
-```bash
-cd backend && npm install
-cp .env.example .env      # set MONGODB_URI + JWT_SECRET
-npm run seed              # 1 user + 2 sample boards
-npm run dev               # http://localhost:5005
+```
+kanban-board/
+├── backend/          Express REST API
+│   ├── models/       User, Board (lists and cards embedded for
+│   │                 atomic drag-reorder persistence)
+│   └── routes/       /api/boards · /api/auth
+└── frontend/         React app (Vite)
+    └── src/
+        └── pages/    Boards overview, Board (drag-and-drop surface)
 ```
 
-### Frontend
+Lists and cards are embedded documents within a board, so a drag operation commits the entire board state in a single atomic write — no cross-collection ordering bugs.
+
+## Tech Stack
+
+| Layer      | Technology                                       |
+| ---------- | ------------------------------------------------ |
+| Frontend   | React 18, Vite, Tailwind CSS                     |
+| Backend    | Node.js, Express, Mongoose                       |
+| Database   | MongoDB Atlas                                    |
+| Security   | Helmet, rate limiting, input sanitization, JWT   |
+
+## Getting Started
+
+**Prerequisites:** Node.js 18+ and a MongoDB connection string.
+
 ```bash
-cd frontend && npm install
-npm run dev               # http://localhost:5173
+# API
+cd backend
+npm install
+cp .env.example .env   # configure environment
+npm run seed           # optional: create sample boards
+npm run dev
+
+# App
+cd frontend
+npm install
+npm run dev
 ```
 
-**Login:** `amar@taskflow.io` / `demo123`
+Environment variables are documented in [`backend/.env.example`](backend/.env.example) and [`frontend/.env.example`](frontend/.env.example).
 
-## ☁️ Deployment
-Two Vercel projects: `backend/` (env: `MONGODB_URI`, `JWT_SECRET`, `ALLOWED_ORIGINS`, `VERCEL=1`)
-and `frontend/` (env: `VITE_API_URL`). Seed once against Atlas.
+## Author
 
-## 📄 License
+**Amar Hassen Mohammednur** — [github.com/Min-joona](https://github.com/Min-joona)
+
+## License
+
 MIT
